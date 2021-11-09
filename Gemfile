@@ -78,3 +78,6 @@ gem 'activeadmin'
 gem 'devise'
 
 gem 'kaminari'
+
+gem 'rails-i18n'
+gem 'devise-i18n'
