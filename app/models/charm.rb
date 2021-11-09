@@ -1,0 +1,2 @@
+class Charm < ApplicationRecord
+end
