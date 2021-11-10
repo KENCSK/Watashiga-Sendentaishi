@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/search', to: 'searches#search'
 
 
-  get '/mypage' => 'users#mypage'
+  get '/my_page' => 'users#my_page'
   resources :users, except: [:new]
 
   resources :posts do

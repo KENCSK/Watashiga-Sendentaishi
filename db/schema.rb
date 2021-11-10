@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_073012) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "prefecture_id"
     t.string "title"
     t.text "text"
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_073012) do
   end
 
   create_table "prefectures", force: :cascade do |t|
-    t.integer "prefecture", default: 0, null: false
+    t.string "prefecture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
