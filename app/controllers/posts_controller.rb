@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     if @post.user_id != current_user.id
-      redirect_to root_path
+      redirect_to root_path, alert: "不正なアクセスです。"
     end
   end
 
@@ -42,8 +42,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    post = Post.find(params[:id])
+    post.destroy
     redirect_to my_page_path, notice: "投稿を削除しました！！"
   end
 

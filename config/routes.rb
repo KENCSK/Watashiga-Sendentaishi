@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new]
 
   resources :posts do
-    resource :charms, only:[:index, :create, :destroy]
+    resource :charms, only:[:create, :destroy]
   end
 
 
