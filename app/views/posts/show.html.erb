@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/userinfo', user: @user %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+
+      <h2><%= @post.prefecture.prefecture %></h2>
+
+      <h2><%= @post.title %></h2>
+
+      <%= attachment_image_tag @post, :post_image, format: 'jpeg', fallback: "no_image.jpg", size: '400x400' %><br>
+
+      <h3><%= @post.text %></h3>
+
+      <div id="charms_buttons_<%= @post.id %>">
+      <%= render "charms/charms", post: @post %>
+      </div>
+
+      <% if @user.id == current_user.id %>
+        <th><%= link_to "Edit", edit_post_path(@post.id), class:'btn btn-sm btn-success' %></th>
+        <th><%= link_to "Destroy", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%> </th>
+      <% end %>
+
+    </div>
+  </div>
+</div>

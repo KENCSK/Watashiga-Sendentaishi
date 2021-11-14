@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users
+
+  root to: 'homes#top'
+
+  get '/search', to: 'searches#search'
+
+
+  get '/my_page' => 'users#my_page'
+  resources :users, except: [:new]
+
+  resources :posts do
+    resource :charms, only:[:create, :destroy]
+  end
+
+
 end
