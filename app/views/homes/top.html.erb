@@ -4,3 +4,16 @@
 <li><%= link_to " 新規投稿",  new_post_path,class: "btn btn-warning mr-3"%></li>
 
 <li><%= link_to " ユーザー一覧",  users_path,class: "btn btn-warning mr-3"%></li>
+
+
+    <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
+      <%= f.collection_select :prefecture_id, Prefecture.all, :prefecture, :prefecture, {prompt: "選択"} %>
+      <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワードを入力:例 山 川 ラーメン" %>
+      <%= f.submit '検索' %>
+    <% end %>
+
+
+
+
+
+

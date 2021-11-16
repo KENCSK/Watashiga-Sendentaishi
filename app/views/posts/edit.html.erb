@@ -1,2 +1,24 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>編集</h1>
+<!-- form_with部分 -->
+<%= form_with model:@post, local:true do |f| %>
+
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+
+  <h4>画像</h4>
+  <%= attachment_image_tag @post, :post_image, format: 'jpeg', fallback: "no_image.jpg", size: '400x400' %><br>
+  <%= f.attachment_field :post_image %>
+
+
+  <h4>都道府県</h4>
+  <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture %>
+
+  <h4>本文</h4>
+  <%= f.text_area :text %>
+
+  <%= f.label :address, '住所' %>
+  <%= f.text_field :address %>
+
+  <%= f.submit '編集完了' %>
+
+<% end %>

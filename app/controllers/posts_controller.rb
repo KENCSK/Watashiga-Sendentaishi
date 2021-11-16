@@ -47,7 +47,28 @@ class PostsController < ApplicationController
     redirect_to my_page_path, notice: "投稿を削除しました！！"
   end
 
+  def search
+    @keyword = params[:keyword]
+
+    if @keyword.present?
+    @posts = []
+    # 分割したキーワードごとに検索
+    @keyword.split(/[[:blank:]]+/).each do |keyword|
+      next if keyword == ""
+      @posts += Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    end
+    @posts.uniq!
+    else
+    # @posts = Post.Where(:prefecture_id).plunk(:prefecture_id).sort
+
+    end
+    @posts = @posts.where(prefecture_id: params[:prefecture_id])
+
+  end
+
   private
+
+
 
   def post_params
     params.require(:post).permit(:title, :text, :address, :post_image, :prefecture_id)

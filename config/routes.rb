@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'homes#top'
 
-  get '/search', to: 'searches#search'
+  get 'posts/search', to: 'posts#search'
 
 
   get '/my_page' => 'users#my_page'
@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :posts do
     resource :charms, only:[:create, :destroy]
+    collection do
+      get "search"
+    end
   end
 
 

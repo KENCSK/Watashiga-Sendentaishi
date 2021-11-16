@@ -12,4 +12,6 @@ class Post < ApplicationRecord
   validates :address
   validates :text, length: { maximum:400 }
   end
+  
+  
 end

@@ -16,9 +16,17 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          <li><input name="search" placeholder="search　🔍"></li>
+          <% unless current_page?(root_path) %>
+            <li>
+            <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
+              <%= f.collection_select :prefecture_id, Prefecture.all, :prefecture, :prefecture, {prompt: "選択"} %>
+              <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワードを入力:例 山 川 ラーメン" %>
+              <%= f.submit '検索' %>
+            <% end %>
+            </li>
+          <% end %>
           <% if user_signed_in? %>
-            <li id="youkoso">　　ようこそ、<%= current_user.name %>さん！</li>
+            <li>ようこそ、<%= current_user.name %>さん！</li>
           <% end %>
         </ul>
 
