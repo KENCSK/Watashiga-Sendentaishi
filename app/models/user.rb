@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :charms, dependent: :destroy
+  has_many :charmed_users, through: :charms, source: :user
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 2, maximum: 20 }
   validates :biography, length: { maximum:50 }

@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :prefecture
   has_many :charms, dependent: :destroy
+  # has_many :charmed_posts, through: :charms, source: :post
 
   attachment :post_image
 

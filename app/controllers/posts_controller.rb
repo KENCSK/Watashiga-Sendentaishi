@@ -62,13 +62,11 @@ class PostsController < ApplicationController
     # @posts = Post.Where(:prefecture_id).plunk(:prefecture_id).sort
 
     end
-    @posts = @posts.where(prefecture_id: params[:prefecture_id])
+    # @posts = @posts.where(prefecture_id: params[:prefecture_id])
 
   end
 
   private
-
-
 
   def post_params
     params.require(:post).permit(:title, :text, :address, :post_image, :prefecture_id)

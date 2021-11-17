@@ -7,15 +7,11 @@ Rails.application.routes.draw do
 
   get 'posts/search', to: 'posts#search'
 
-
   get '/my_page' => 'users#my_page'
   resources :users, except: [:new]
 
   resources :posts do
     resource :charms, only:[:create, :destroy]
-    collection do
-      get "search"
-    end
   end
 
 
