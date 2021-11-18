@@ -16,4 +16,12 @@ class User < ApplicationRecord
   def already_charmed?(post)
     self.charms.exists?(post_id: post.id)
   end
+
+  scope :order_by_charm_count, -> {
+    self.joins(:charms).group("users.id").order("count_all DESC").count.keys.map.with_index { |id, i| "WHEN #{id} THEN #{i} " }.join
+  }
+
+  def self.sort_user_by_charm_rank
+    self.joins(posts: :charms).group("users.id, users.name").order("CASE users.id #{order_by_charm_count} END").order("users.id, count_all DESC").count
+  end
 end

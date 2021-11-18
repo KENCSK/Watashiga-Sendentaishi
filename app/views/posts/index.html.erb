@@ -20,7 +20,11 @@
             </td>
             <td><%= link_to post.title, post_path(post.id) %></td>
             <th><%= post.text %></th>
-            <th></th>
+            <th>
+              <div id="charms_buttons_<%= post.id %>">
+                <%= render "charms/charms", post: post %>
+              </div>
+            </th>
           </tr>
           <% end %>
           </tbody>

@@ -13,15 +13,17 @@
 
       <h3><%= @post.text %></h3>
 
-      <div id="charms_buttons_<%= @post.id %>">
-      <%= render "charms/charms", post: @post %>
-      </div>
+
 
       <% if @user.id == current_user.id %>
         <th><%= link_to "Edit", edit_post_path(@post.id), class:'btn btn-sm btn-success' %></th>
         <th><%= link_to "Destroy", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%> </th>
+        <%= @post.charms.count %>
+      <% else %>
+        <div id="charms_buttons_<%= @post.id %>">
+          <%= render "charms/charms", post: @post %>
+        </div>
       <% end %>
-
     </div>
   </div>
 </div>

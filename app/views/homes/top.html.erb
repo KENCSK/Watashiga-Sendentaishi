@@ -1,41 +1,101 @@
-<%= render 'layouts/flash_messages' %>
-<li><%= link_to " 新規投稿",  new_post_path,class: "btn btn-warning mr-3"%></li>
-
-<li><%= link_to " ユーザー一覧",  users_path,class: "btn btn-warning mr-3"%></li>
-
-
-    <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
-      <%= f.collection_select :prefecture_id, Prefecture.all, :prefecture, :prefecture, {prompt: "選択"} %>
-      <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワードを入力:例 山 川 ラーメン" %>
-      <%= f.submit '検索' %>
-    <% end %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-1">
-      <h2>魅力ランキング</h2>
-        <table class="table">
-         <thead>
-           <th>順位</th>
-           <th>都道府県</th>
-           <th>魅力</th>
-           <th colspan="3"></th>
-         </thead>
-         <tbody>
-         <% @prefectures.each.with_index(1) do |(prefecture, charm_count), rank| %>
-          <tr>
-            <th><%= rank %></th>
-            <th><%= prefecture %></th>
-            <th><%= charm_count %></th>
-          </tr>
+<div class="top-mv">
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <div>
+      <div class="top-mv-content-head text-center">
+        探して見る
+      </div>
+      <div class="text-center align-self-center">
+        <div class="search-form-box d-inline-block">
+          <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "都道府県"} %>
+            <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワード :例 山 川 ラーメン" %>
+            <%= f.submit '検索' %>
           <% end %>
-          </tbody>
-        </table>
-     </div>
+        </div>
+      </div>
+      <div class="top-mv-content-head text-center">
+        今日の魅力を
+      </div>
+      <div class="text-center align-self-center">
+        <!--<div class="search-form-box d-inline-block">-->
+          <%= link_to "新規投稿", new_post_path,class: "btn btn-warning mr-3"%>
+        <!--</div>-->
+      </div>
+      <div class="top-mv-content-head text-center">
+        宣伝する
+      </div>
+    </div>
   </div>
 </div>
 
+<div class="container">
+    <%= render 'layouts/flash_messages' %>
 
-
+    <div class="d-md-flex flex-row justify-content-center">
+      <div class="col-md-4">
+        <h2 class="top-rank-name">魅力ランキング</h2>
+          <table class="table table-bordered">
+           <thead>
+              <tr>
+                <th>順位</th>
+                <th>都道府県</th>
+                <th>魅力</th>
+              </tr>
+           </thead>
+           <tbody>
+           <% @prefectures.each.with_index(1) do |prefecture, rank| %>
+            <tr>
+              <td><%= rank %></td>
+              <td><%= link_to prefecture.prefecture, posts_search_path(@prefecture_id) %></td>
+              <td><%= prefecture.count %></td>
+            </tr>
+            <% end %>
+            </tbody>
+          </table>
+       </div>
+      <div class="col-md-4">
+        <h2 class="top-rank-name">宣伝大使ランキング</h2>
+          <table class="table table-bordered">
+           <thead>
+              <tr>
+                <th>順位</th>
+                <th>宣伝大使</th>
+                <th>魅力</th>
+              </tr>
+           </thead>
+           <tbody>
+             <% @users.each.with_index(1) do |user, rank| %>
+              <tr>
+                <td><%= rank %></td>
+                <td><%=link_to user.user.name, user_path(user.user_id) %></td>
+                <td><%= user.count %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+       </div>
+      <div class="col-md-4">
+        <h2 class="top-rank-name">最新の投稿</h2>
+          <table class="table table-bordered">
+           <thead>
+              <tr>
+                <th>宣伝大使</th>
+                <th>都道府県</th>
+                <th>タイトル</th>
+              </tr>
+           </thead>
+           <tbody>
+           <% @posts.each do |post| %>
+            <tr>
+              <td><%= post.user.name %></td>
+              <td><%= post.prefecture.prefecture %></td>
+              <td><%= post.title %></td>
+            </tr>
+            <% end %>
+            </tbody>
+          </table>
+       </div>
+    </div>
+  </div>
 
 

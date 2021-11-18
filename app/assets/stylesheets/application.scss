@@ -11,10 +11,70 @@
  * It is generally better to create a new file per style scope.
  *
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Shippori+Mincho&display=swap');
+
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
 .text-center {
   text-align: center;
+}
+
+// .top_bg {
+//     background-image: image-url('top_bg.jpg');
+//     background-size: auto 600px;
+//     background-position: center;
+// }
+
+main {
+  font-family: 'Lato', sans-serif;
+}
+
+.search-submit {/*aタグを画像の真ん中に*/
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  /*以下装飾*/
+  margin:0;/*余計な隙間を除く*/
+  font-size: 20px;/*文字サイズ*/
+  border: solid white 2px; /*線で囲う*/
+  padding: 7px;/*文字と線の間の余白*/
+  color: white;/*文字色*/
+  text-decoration: none;/*下線を表示させない*/
+  }
+
+
+.top-mv {
+  background-image: image-url('top_bg.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  // background-attachment: fixed;
+  background-size: cover;
+  background-color: #fff;
+  height: 400px;
+}
+
+.top-mv-content-head {
+  color: #fff;
+  font-size: calc(15px + 2.5vw);
+  letter-spacing: .8rem;
+  font-family: 'Shippori Mincho', serif;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, .5);
+}
+
+.search-form-box {
+  padding: 1rem;
+  border: solid #fff 2px;
+}
+
+.top-rank-name {
+  background-color: #FFD48C;
+  font-size: calc(10px + 1vw);
+  text-align: center;
+  margin-top: 10px;
 }

@@ -1,10 +1,10 @@
-<% if current_user.already_charmed?(@post) %>
-  <%= link_to post_charms_path(@post), method: :delete, remote: true do %>
+<% if current_user.already_charmed?(post) %>
+  <%= link_to post_charms_path(post), method: :delete, remote: true do %>
     <i class="fas fa-heart"></i>
   <% end %>
 <% else %>
-  <%= link_to post_charms_path(@post), method: :post, remote: true do %>
+  <%= link_to post_charms_path(post), method: :post, remote: true do %>
     <i class="far fa-heart"></i>
   <% end %>
 <% end %>
-<%= @post.charms.count %>
+<%= post.charms.count %>
