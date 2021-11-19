@@ -32,22 +32,9 @@ main {
   font-family: 'Lato', sans-serif;
 }
 
-.search-submit {/*aタグを画像の真ん中に*/
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  /*以下装飾*/
-  margin:0;/*余計な隙間を除く*/
-  font-size: 20px;/*文字サイズ*/
-  border: solid white 2px; /*線で囲う*/
-  padding: 7px;/*文字と線の間の余白*/
-  color: white;/*文字色*/
-  text-decoration: none;/*下線を表示させない*/
-  }
-
+.container {
+  max-width: 1280px;
+}
 
 .top-mv {
   background-image: image-url('top_bg.jpg');
@@ -77,4 +64,68 @@ main {
   font-size: calc(10px + 1vw);
   text-align: center;
   margin-top: 10px;
+  width: auto;
 }
+
+.card {
+  width: 350px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+  margin: 10px;
+}
+.card-img-top {
+  padding: 0 0 0 25px;
+  max-width: 100%;
+  height: auto;
+}
+.card-body {
+  padding: 20px;
+}
+
+
+.card-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+.card-text {
+  color: #777;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.card-charms {
+  display: inline-block;
+}
+
+.card-link {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding: 20px;
+}
+.card-link a {
+  text-decoration: none;
+  color: #0bd;
+  margin: 0 10px;
+}
+.card-link a:hover {
+  color: #0090aa;
+}
+
+.charm-btn {
+ width: 20px;
+ height: 20px;
+ font-size: 20px;
+ color: #FF3333;
+ margin-left: auto;
+ }
+
+.un-charm-btn {
+ width: 20px;
+ height: 20px;
+ font-size: 20px;
+ color: #e54747;
+ margin: auto;
+ text-align: right;
+ }

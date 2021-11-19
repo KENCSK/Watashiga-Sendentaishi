@@ -50,24 +50,30 @@ class PostsController < ApplicationController
   def search
     @keyword = params[:keyword]
 
-    if @keyword.present?
-      @posts = []
+    if (@keyword.present?) and ((params[:prefecture_id]).present?)
+      @posts = Post.all
       # 分割したキーワードごとに検索
       @keyword.split(/[[:blank:]]+/).each do |keyword|
         next if keyword == ""
-        @posts += Post.where(prefecture_id: params[:prefecture_id])
-                      .where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
+        @posts = Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
                                 "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
                                 )
       end
-      @posts.uniq!
-    else
-      # @posts = Post.Where(:prefecture_id).plunk(:prefecture_id).sort
+        @posts = @posts.where(prefecture_id: params[:prefecture_id]).order("created_at DESC")
+    elsif (params[:prefecture_id]).present?
+      @posts = Post.where(prefecture_id: params[:prefecture_id])
+    elsif @keyword.present?
       @posts = Post.all
-
+      # 分割したキーワードごとに検索
+      @keyword.split(/[[:blank:]]+/).each do |keyword|
+        next if keyword == ""
+        @posts = Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
+                                "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
+                                ).order("created_at DESC")
+      end
+    else
+      @posts = Post.all.order("created_at DESC")
     end
-    # @posts = @posts.where(prefecture_id: params[:prefecture_id])
-
   end
 
   private
