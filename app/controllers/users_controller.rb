@@ -2,7 +2,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def my_page
-    @posts = current_user.posts
+    @posts = current_user.posts.page(params[:page]).per(9)
+    @user = current_user
+  end
+
+  def charms
+    # @posts = current_user.posts
+    @posts = current_user.charmed_posts.page(params[:page]).per(9)
     @user = current_user
   end
 

@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = @post.user
   end
-
+  
   def new
     @post = Post.new
   end
@@ -57,11 +57,11 @@ class PostsController < ApplicationController
         next if keyword == ""
         @posts = Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
                                 "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
-                                )
+                                ).page(params[:page]).per(9).order("created_at DESC")
       end
         @posts = @posts.where(prefecture_id: params[:prefecture_id]).order("created_at DESC")
     elsif (params[:prefecture_id]).present?
-      @posts = Post.where(prefecture_id: params[:prefecture_id])
+      @posts = Post.where(prefecture_id: params[:prefecture_id]).page(params[:page]).per(9).order("created_at DESC")
     elsif @keyword.present?
       @posts = Post.all
       # 分割したキーワードごとに検索
@@ -69,10 +69,10 @@ class PostsController < ApplicationController
         next if keyword == ""
         @posts = Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
                                 "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
-                                ).order("created_at DESC")
+                                ).page(params[:page]).per(12).order("created_at DESC")
       end
     else
-      @posts = Post.all.order("created_at DESC")
+      redirect_to request.referer,  alert: '都道府県またはキーワードを入力してください'
     end
   end
 

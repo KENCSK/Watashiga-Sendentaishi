@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="texts-wrapper">
     <div class="contents-title">
@@ -7,21 +6,23 @@
       <% end %>
       <div class="row">
         <% @posts.each do |post| %>
-          <div class="col-lg-4">
+          <div class="col-md-4">
             <div class="card">
               <img class="card-img-top">
-              <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg", size: '348x200' %>
+              <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
               </img>
               <div class="card-body">
                 <h1 class="card-title"><%= (post.prefecture.prefecture) + " " + (post.address) %></h1>
                 <p class="card-text"><%= post.title %></p>
                 <% if post.user.id == current_user.id %>
-                  <th><%= link_to "Edit", edit_post_path(post.id), class:'btn btn-sm btn-success' %></th>
-                  <th><%= link_to "Destroy", post_path(post), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%> </th>
+                  <%= link_to "Edit", edit_post_path(post.id), class:'btn btn-sm btn-success' %>
+                  <%= link_to "Destroy", post_path(post), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%>
+                  <div class="text-right mr-1">
                   <i class="fas fa-heart charm-btn"></i>
                   <%= post.charms.count %>
+                  </div>
                 <% else %>
-                  <div id="charms_buttons_<%= post.id %>">
+                  <div class="text-right mr-1", id="charms_buttons_<%= post.id %>">
                     <%= render "charms/charms", post: post %>
                   </div>
                 <% end %>
@@ -35,6 +36,7 @@
       </div>
     </div>
   </div>
+  <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
 </div>
 
 

@@ -9,7 +9,7 @@
       <div class="text-center align-self-center">
         <div class="search-form-box d-inline-block">
           <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
-            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "都道府県"} %>
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "都道府県を指定しない"} %>
             <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワード :例 山 川 ラーメン" %>
             <%= f.submit '検索' %>
           <% end %>
@@ -31,99 +31,99 @@
 </div>
 
 <div class="container">
-    <div class="d-sm-flex flex-row justify-content-center text-center">
-      <div class="col-sm-4">
-        <div class="top-rank-name">魅力ランキング</div>
-          <table class="table table-bordered text-nowrap">
-           <thead>
-              <tr>
-                <th>順位</th>
-                <th>都道府県</th>
-                <th>魅力</th>
-              </tr>
-           </thead>
-           <tbody>
-            <!--順位を出すための比較対象を一時的に保存するため-->
-            <% last_prefecture_charms = 0 %>
-            <!--ランキングのスタート位置-->
-            <% rank = 1 %>
-            <% @prefectures.each.with_index(1) do |prefecture, i| %>
+  <div class="d-md-flex flex-row justify-content-center text-center">
+    <div class="col-md-4">
+      <h2 class="top-rank-name">魅力ランキング</h2>
+        <table class="table table-bordered text-nowrap">
+         <thead>
+            <tr>
+              <th>順位</th>
+              <th>都道府県</th>
+              <th>魅力</th>
+            </tr>
+         </thead>
+         <tbody>
+          <!--順位を出すための比較対象を一時的に保存するため-->
+          <% last_prefecture_charms = 0 %>
+          <!--ランキングのスタート位置-->
+          <% rank = 1 %>
+          <% @prefectures.each.with_index(1) do |prefecture, i| %>
+          <tr>
+            <td>
+        		  <!--もし、対象のカウントが同位置ならそのまま表示-->
+              <% if prefecture.count == last_prefecture_charms %>
+          		  第<%= rank %>位
+          		<% else %>
+          			<!--異なる場合は、rankに現在のループ回数を入れる-->
+          			<% rank = i %>
+          			第<%= rank %>位
+          		<% end %>
+          	  <!--仮のお気に入り数を一時的保存-->
+            	<% last_prefecture_charms = prefecture.count %>
+            </td>
+            <td><%= link_to prefecture.prefecture, posts_search_path(prefecture_id: prefecture.id) %></td>
+            <td><%= prefecture.count %></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+     </div>
+    <div class="col-md-4">
+      <h2 class="top-rank-name">宣伝大使ランキング</h2>
+        <table class="table table-bordered text-nowrap">
+         <thead>
+            <tr>
+              <th>順位</th>
+              <th>宣伝大使</th>
+              <th>魅力</th>
+            </tr>
+         </thead>
+         <tbody>
+          <!--順位を出すための比較対象を一時的に保存するため-->
+          <% last_user_charms = 0 %>
+          <!--ランキングのスタート位置-->
+          <% rank = 1 %>
+          <% @users.each.with_index(1) do |user, i| %>
             <tr>
               <td>
           		  <!--もし、対象のカウントが同位置ならそのまま表示-->
-                <% if prefecture.count == last_prefecture_charms %>
-            		  第<%= rank %>位
+                <% if user.count == last_user_charms %>
+            			第<%= rank %>位
             		<% else %>
             			<!--異なる場合は、rankに現在のループ回数を入れる-->
             			<% rank = i %>
             			第<%= rank %>位
             		<% end %>
             	  <!--仮のお気に入り数を一時的保存-->
-              	<% last_prefecture_charms = prefecture.count %>
-              </td>
-              <td><%= link_to prefecture.prefecture, posts_search_path(@prefecture_id) %></td>
-              <td><%= prefecture.count %></td>
+              	<% last_user_charms = user.count %>
+                </td>
+              <td><%=link_to user.user.name, user_path(user.user_id) %></td>
+              <td><%= user.count %></td>
             </tr>
             <% end %>
-            </tbody>
-          </table>
-       </div>
-      <div class="col-sm-4">
-        <div class="top-rank-name">宣伝大使ランキング</div>
-          <table class="table table-bordered text-nowrap">
-           <thead>
-              <tr>
-                <th>順位</th>
-                <th>宣伝大使</th>
-                <th>魅力</th>
-              </tr>
-           </thead>
-           <tbody>
-            <!--順位を出すための比較対象を一時的に保存するため-->
-            <% last_user_charms = 0 %>
-            <!--ランキングのスタート位置-->
-            <% rank = 1 %>
-            <% @users.each.with_index(1) do |user, i| %>
-              <tr>
-                <td>
-            		  <!--もし、対象のカウントが同位置ならそのまま表示-->
-                  <% if user.count == last_user_charms %>
-              			第<%= rank %>位
-              		<% else %>
-              			<!--異なる場合は、rankに現在のループ回数を入れる-->
-              			<% rank = i %>
-              			第<%= rank %>位
-              		<% end %>
-              	  <!--仮のお気に入り数を一時的保存-->
-                	<% last_user_charms = user.count %>
-                  </td>
-                <td><%=link_to user.user.name, user_path(user.user_id) %></td>
-                <td><%= user.count %></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-       </div>
-      <div class="col-sm-4">
-        <div class="top-rank-name">最新の投稿</div>
-          <table class="table table-bordered text-nowrap">
-           <thead>
-              <tr>
-                <th>宣伝大使</th>
-                <th>タイトル</th>
-                <th>都道府県</th>
-              </tr>
-           </thead>
-           <tbody>
-           <% @posts.each do |post| %>
+          </tbody>
+        </table>
+     </div>
+    <div class="col-md-4">
+      <h2 class="top-rank-name">最新の投稿</h2>
+        <table class="table table-bordered">
+         <thead>
             <tr>
-              <td><%= post.user.name %></td>
-              <td><%= link_to post.title.truncate(11, omission: '...'), post_path(post.id) %></td>
-              <td><%= post.prefecture.prefecture %></td>
+              <th>宣伝大使</th>
+              <th>タイトル</th>
+              <th class="text-nowrap">都道府県</th>
             </tr>
-            <% end %>
-            </tbody>
-          </table>
-       </div>
-    </div>
+         </thead>
+         <tbody>
+         <% @posts.each do |post| %>
+          <tr>
+            <td class="text-nowrap"><%= post.user.name %></td>
+            <td><%= link_to post.title.truncate(11, omission: '...'), post_path(post.id) %></td>
+            <td class="text-nowrap"><%= post.prefecture.prefecture %></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+     </div>
+  </div>
 </div>

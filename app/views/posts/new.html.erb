@@ -1,22 +1,33 @@
-<h1>新規投稿</h1>
-<!-- form_with部分 -->
-<%= form_with model:@post, local:true do |f| %>
-
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-
-  <h4>画像</h4>
-  <%= f.attachment_field :post_image %>
-
-  <h4>都道府県</h4>
-  <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture %>
-
-  <h4>本文</h4>
-  <%= f.text_area :text %>
-
-  <%= f.label :address, '住所' %>
-  <%= f.text_field :address %>
-
-  <%= f.submit '投稿' %>
-
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <h1 class="font-weight-normal mt-3">宣伝投稿</h1>
+  </div>
+  <div class="row justify-content-center">
+    <%= form_with model:@post, local:true do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <div class="form-group col-12 col-sm-12">
+      <label class="form-label">タイトル</label>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group col-12 col-sm-12">
+      <label class="form-label">本文</label>
+      <%= f.text_area :text, class: "form-control" %>
+    </div>
+    <div class="form-group col-12 col-sm-12">
+      <label class="form-label">都道府県</label>
+      <%=f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "必ず都道府県を選択してください"}, class: "form-control" %>
+    </div>
+    <div class="form-group col-12 col-sm-12">
+      <label class="form-label">住所</label>
+      <%= f.text_field :address, placeholder: "〇〇市〇〇区〇〇町〇丁目〇〇-〇", class: "form-control" %>
+    </div>
+    <div class="form-group col-12 col-sm-12">
+      <label class="form-label">画像</label><br>
+      <%= f.attachment_field :post_image %>
+    </div>
+    <div class="form-group col-12 col-sm-12">
+    <%= f.submit '投稿する', class: "btn btn-warning" %>
+    <% end %>
+    </div>
+  </div>
+</div>

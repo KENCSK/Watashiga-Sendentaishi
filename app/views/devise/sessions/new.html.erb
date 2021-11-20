@@ -2,7 +2,6 @@
 <div class="card col-sm-3 mx-auto mt-3">
   <div class="card-body">
     <h3 class="mt-1 mb-3">ログイン</h3>
-
     <% if devise_mapping.registerable? && controller_name != 'registrations' %>
       <%= link_to "会員登録がお済でない方はこちらから新規登録を行ってください", new_user_registration_path %>
     <% end %>
