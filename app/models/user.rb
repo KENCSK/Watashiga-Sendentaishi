@@ -10,15 +10,13 @@ class User < ApplicationRecord
   has_many :charms, dependent: :destroy
   has_many :charmed_posts, through: :charms, source: :post
 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, {presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }}
   validates :name, presence: true, uniqueness: true, length: { minimum: 2, maximum: 20 }
   validates :biography, length: { maximum:50 }
 
   def already_charmed?(post)
     self.charms.exists?(post_id: post.id)
   end
-
-  # def self.sort_user_by_charm_rank
-  #   self.joins(:charms).group(:id).select('user, count(users.id) AS count').order('count desc')
-  # end
 
 end

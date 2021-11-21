@@ -6,23 +6,23 @@
     <div class="col-md-8 offset-md-1">
       <div class="card">
         <div class="card-body">
-        <h2 class="card-title"><%= @post.title %></h2>
+        <h2 class="card-title"><%=  @post_detail.title %></h2>
         </div>
         <img class="card-img-top">
-        <%= attachment_image_tag @post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
+        <%= attachment_image_tag  @post_detail, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
         </img>
         <div class="card-body">
-          <h1 class="card-title"><%= (@post.prefecture.prefecture) + " " + (@post.address) %></h1>
-          <p class="card-text"><%= @post.text %></p>
+          <h1 class="card-title"><%= ( @post_detail.prefecture.prefecture) + " " + ( @post_detail.address) %></h1>
+          <p class="card-text"><%=  @post_detail.text %></p>
           <div class="d-grid gap-2 d-md-block">
-            <% if @post.user.id == current_user.id %>
-              <%= link_to "編集", edit_post_path(@post.id), class:'btn btn-sm btn-success' %>
-              <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%>
+            <% if  @post_detail.user.id == current_user.id %>
+              <%= link_to "編集", edit_post_path( @post_detail.id), class:'btn btn-sm btn-success' %>
+              <%= link_to "削除", post_path( @post_detail), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%>
               <i class="fas fa-heart charm-btn"></i>
-              <%= @post.charms.count %>
+              <%=  @post_detail.charms.count %>
             <% else %>
-            <div id="charms_buttons_<%= @post.id %>">
-              <%= render "charms/charms", post: @post %>
+            <div id="charms_buttons_<%=  @post_detail.id %>">
+              <%= render "charms/charms", post:  @post_detail %>
             </div>
           <% end %>
             <div class="text-right mb-2">

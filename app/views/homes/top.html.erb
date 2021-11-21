@@ -7,7 +7,7 @@
         探して見る
       </div>
       <div class="text-center align-self-center">
-        <div class="search-form-box d-inline-block">
+        <div class="top-search-form-box d-inline-block">
           <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
             <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "都道府県を指定しない"} %>
             <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワード :例 山 川 ラーメン" %>
@@ -33,8 +33,8 @@
 <div class="container">
   <div class="d-md-flex flex-row justify-content-center text-center">
     <div class="col-md-4">
-      <h2 class="top-rank-name">魅力ランキング</h2>
-        <table class="table table-bordered text-nowrap">
+      <h2 class="top-rank-prefecture">魅力ランキング</h2>
+        <table class="table table-top table-rank-prefecture table-bordered text-nowrap">
          <thead>
             <tr>
               <th>順位</th>
@@ -69,8 +69,8 @@
         </table>
      </div>
     <div class="col-md-4">
-      <h2 class="top-rank-name">宣伝大使ランキング</h2>
-        <table class="table table-bordered text-nowrap">
+      <h2 class="top-rank-user">宣伝大使ランキング</h2>
+        <table class="table table-top table-rank-user table-bordered text-nowrap">
          <thead>
             <tr>
               <th>順位</th>
@@ -83,7 +83,7 @@
           <% last_user_charms = 0 %>
           <!--ランキングのスタート位置-->
           <% rank = 1 %>
-          <% @users.each.with_index(1) do |user, i| %>
+          <% @user_post_like_ranks.each.with_index(1) do |user, i| %>
             <tr>
               <td>
           		  <!--もし、対象のカウントが同位置ならそのまま表示-->
@@ -97,7 +97,7 @@
             	  <!--仮のお気に入り数を一時的保存-->
               	<% last_user_charms = user.count %>
                 </td>
-              <td><%=link_to user.user.name, user_path(user.user_id) %></td>
+              <td><%= link_to user.user.name, user_path(user.user.id) %></td>
               <td><%= user.count %></td>
             </tr>
             <% end %>
@@ -105,8 +105,8 @@
         </table>
      </div>
     <div class="col-md-4">
-      <h2 class="top-rank-name">最新の投稿</h2>
-        <table class="table table-bordered">
+      <h2 class="top-latest">最新の投稿</h2>
+        <table class="table table-top table-top-latest table-bordered">
          <thead>
             <tr>
               <th>宣伝大使</th>

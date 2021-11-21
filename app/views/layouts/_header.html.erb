@@ -1,15 +1,15 @@
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <nav class="navbar navbar-expand-md navbar-dark bg-light">
     <div class="container">
 
       <nav class="navbar-brand  p-2">
         <%= link_to root_path do %>
-        <%= image_tag "logo.png", :size => "210x100" %>
+        <%= image_tag "logo.png", :size => "150x75" %>
         <% end %>
       </nav>
 
       <ul class="navbar-nav justify-content-start">
-        <li>
+        <li class="text-nowrap">
           <br><p>都道府県を気軽に宣伝して<br>魅力を伝えるサイト。</p>
         </li>
       </ul>
@@ -29,8 +29,8 @@
           <span class="navbar-toggler-icon"></span>
       </div>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav navbar-nav-item ml-auto">
+      <div class="collapse navbar-collapse align-items-right" id="navbarNavDropdown">
+        <ul class="navbar-nav navbar-nav-item ml-auto text-nowrap">
           <!--会員ログイン時-->
           <% if user_signed_in? %>
             <li class="nav-item"><%= link_to " トップ", root_path, class: "btn btn-warning mr-3 mt-3 pt-1" %></li>
