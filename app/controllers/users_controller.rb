@@ -11,13 +11,9 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def index
-  end
-
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
-    @post = Post.find(params[:id])
+    @posts = @user.posts.page(params[:page])
   end
 
   def edit

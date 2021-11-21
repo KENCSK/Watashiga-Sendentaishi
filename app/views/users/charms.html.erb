@@ -18,9 +18,9 @@
                   <div class="card-body">
                     <h1 class="card-title"><%= (post.prefecture.prefecture) + " " + (post.address) %></h1>
                     <p class="card-text"><%= post.title %></p>
-                      <div class="text-right mr-1", id="charms_buttons_<%= post.id %>">
-                        <%= render "charms/charms", post: post %>
-                      </div>
+                    <div class="text-right mr-1", id="charms_buttons_<%= post.id %>">
+                      <%= render "charms/charms", post: post %>
+                    </div>
                   </div>
                   <div class="card-link">
                     <a><%= link_to "詳細を見る", post_path(post.id) %> </a>
