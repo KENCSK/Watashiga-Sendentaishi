@@ -78,6 +78,8 @@ body {
 /* テーブル
 ====================================================*/
 table {
+  word-break: break-all;
+  word-wrap: break-all;
   border: 1px solid #fff;
   border-collapse: separate;
   border-spacing: 2px;
@@ -205,6 +207,21 @@ table tbody td {
 .navbar-toggler-button {
   align-items: flex-end;
 }
+/* Devise新規登録ページ用エラーメッセージ
+====================================================*/
+.devise-error-messages {
+  color: #721C24;
+  background-color: #F8D7DA;
+  text-align: center;
+}
+
+/* layouts_error_messages用レイアウト調整
+====================================================*/
+.model-error-messages {
+  color: #721C24;
+  background-color: #F8D7DA;
+  text-align: left;
+}
 
 /* フッター
 ====================================================*/
@@ -217,17 +234,13 @@ footer {
 
 /* 共通パーツ
 ====================================================*/
-.text-center {
-  text-align: center;
-}
-
 a:hover{
   color : #ff7043;
 }
 
 .pagination {
+  justify-content: center;
   margin-top: 10px;
-  justify-content: right;
 }
 
 .charm-btn {

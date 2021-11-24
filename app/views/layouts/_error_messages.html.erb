@@ -1,10 +1,10 @@
-      <div id="error_explanation">
-        <% if model.errors.any? %>
-          <h3 class="text-danger"><%= model.errors.count %> error prohibited this obj from being saved:</h3>
-          <ul>
-            <% model.errors.full_messages.each do |message| %>
-              <ul><li class="text-danger"><%= message %></li></ul>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
+<div class="model-error-messages", id="error_explanation">
+  <% if model.errors.any? %>
+    <h3><%= model.errors.count %> 件のエラーが発生しました下記の条件を満たしてください。</h3>
+    <ul>
+      <% model.errors.full_messages.each do |message| %>
+        <ul><li><%= message %></li></ul>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_09_073012) do
+ActiveRecord::Schema.define(version: 2021_11_23_165535) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 2021_11_09_073012) do
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "post_image_filename"
+    t.string "post_image_size"
+    t.string "post_image_content_type"
   end
 
   create_table "prefectures", force: :cascade do |t|
@@ -73,6 +76,9 @@ ActiveRecord::Schema.define(version: 2021_11_09_073012) do
     t.datetime "updated_at", null: false
     t.text "biography"
     t.text "profile_image_id"
+    t.string "profile_image_filename"
+    t.string "profile_image_size"
+    t.string "profile_image_content_type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

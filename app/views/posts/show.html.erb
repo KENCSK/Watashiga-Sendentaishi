@@ -6,10 +6,10 @@
     <div class="col-md-8 offset-md-1">
       <div class="card">
         <div class="card-body">
-        <h2 class="card-title"><%=  @post_detail.title %></h2>
+          <h2 class="card-title"><%=  @post_detail.title %></h2>
         </div>
         <img class="card-img-top">
-        <%= attachment_image_tag  @post_detail, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
+          <%= attachment_image_tag  @post_detail, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
         </img>
         <div class="card-body">
           <h1 class="card-title"><%= ( @post_detail.prefecture.prefecture) + " " + ( @post_detail.address) %></h1>
@@ -21,10 +21,10 @@
               <i class="fas fa-heart charm-btn"></i>
               <%=  @post_detail.charms.count %>
             <% else %>
-            <div id="charms_buttons_<%=  @post_detail.id %>">
-              <%= render "charms/charms", post:  @post_detail %>
-            </div>
-          <% end %>
+              <div id="charms_buttons_<%=  @post_detail.id %>">
+                <%= render "charms/charms", post:  @post_detail %>
+              </div>
+            <% end %>
             <div class="text-right mb-2">
               <%= link_to "戻る", :back, class: "btn btn-primary" %>
             </div>

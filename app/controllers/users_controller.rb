@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
 
   def my_page
-    @posts = current_user.posts.page(params[:page])
+    @visible_search_form = true
     @user = current_user
+    @posts = current_user.posts.page(params[:page])
   end
 
   def charms
-    @posts = current_user.charmed_posts.page(params[:page])
     @user = current_user
+    @posts = current_user.charmed_posts.page(params[:page])
   end
 
   def show
@@ -17,9 +17,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
     if @user.id != current_user.id
-      redirect_to root_path
+      redirect_to root_path, alert: "不正なアクセスです"
     end
   end
 

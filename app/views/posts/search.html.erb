@@ -4,8 +4,10 @@
       <% if @posts.empty? %>
         <h3 class="text-center">検索結果に該当する投稿がありませんでした</h3>
       <% end %>
-      <div class="row">
-        <% @posts.each do |post| %>
+      <% @posts.each_with_index do |post, i| %>
+        <%if i%3 == 0%>
+        <div class="row">
+        <%end%>
           <div class="col-md-4">
             <div class="card">
               <img class="card-img-top">
@@ -32,11 +34,20 @@
               </div>
             </div>
           </div>
+        <%if i%3 == 2%>
+        </div>
         <% end %>
+      <% end %>
+      <% if (@posts.count % 3) != 0%> <%# cardが３の倍数じゃない場合閉じられないので３の倍数でない場合閉じるためにこの処理を追加 %>
+        </div>
+      <% end %>
+
+      <div class="row" style="justify-content: right;">
+      <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
       </div>
+
     </div>
   </div>
-  <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
 </div>
 
 

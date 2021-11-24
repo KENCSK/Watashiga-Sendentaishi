@@ -1,25 +1,29 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-3 col-sm-5">
+    <div class="col-md-3 col-sm-10">
       <%= render 'userinfo', user: @user %>
     </div>
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-8 col-sm-12 offset-md-1">
+      <h2>ユーザー情報編集画面</h2>
       <%= form_with model:@user, local:true do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-      <h2>ユーザー情報編集画面</h2>
-      <div class="form-group col-11 col-sm-5">
-        <label>ユーザー名</label>
+      <div class="form-group col-md-8 col-sm-12">
+        <label class="form-label">ユーザー名</label>
         <%= f.text_field :name, class:"form-control" %>
       </div>
-      <div class="form-group col-11 col-sm-5">
-        <label>プロフィール画像</label>
+      <div class="form-group col-md-8 col-sm-12">
+        <%= f.label :メールアドレス, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+      <div class="form-group col-md-8 col-sm-12">
+        <label class="form-label">プロフィール画像</label>
         <%= f.attachment_field :profile_image, placeholder: "Image",class:"form-control-file user_image" %>
       </div>
-      <div class="form-group col-11 col-sm-5">
-        <label>自己紹介</label>
+      <div class="form-group col-md-8 col-sm-12">
+        <label class="form-label">自己紹介</label>
         <%= f.text_area :biography, autofocus: true, id:"inputIntroduction", placeholder:"Introduction",class:"form-control introduction" %>
       </div>
-      <div class="form-group col-11 col-sm-5">
+      <div class="form-group col-md-8 col-sm-12">
         <%= f.submit "編集を完了する",class:"btn btn-success"%>
       </div>
       <% end %>

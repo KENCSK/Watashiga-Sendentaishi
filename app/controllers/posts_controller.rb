@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
 
   def index
     @posts = Post.all
@@ -31,11 +30,10 @@ class PostsController < ApplicationController
     end
   end
 
-
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post.id), notice: "投稿を更新しました！！"
+      redirect_to post_path(@post.id), notice: "投稿を更新しました!!"
     else
       render :edit
     end
@@ -44,36 +42,16 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to my_page_path, notice: "投稿を削除しました！！"
+    redirect_to my_page_path, notice: "投稿を削除しました."
   end
 
   def search
-    @keyword = params[:keyword]
-
-    if (@keyword.present?) and ((params[:prefecture_id]).present?)
-      @posts = Post.all
-      # 分割したキーワードごとに検索
-      @keyword.split(/[[:blank:]]+/).each do |keyword|
-        next if keyword == ""
-        @posts = Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
-                                "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
-                                ).page(params[:page]).order("created_at DESC")
-      end
-        @posts = @posts.where(prefecture_id: params[:prefecture_id]).order("created_at DESC")
-    elsif (params[:prefecture_id]).present?
-      @posts = Post.where(prefecture_id: params[:prefecture_id]).page(params[:page]).order("created_at DESC")
-    elsif @keyword.present?
-      @posts = Post.all
-      # 分割したキーワードごとに検索
-      @keyword.split(/[[:blank:]]+/).each do |keyword|
-        next if keyword == ""
-        @posts = Post.where('title LIKE(?) OR text LIKE(?) OR address LIKE(?)',
-                                "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
-                                ).page(params[:page]).order("created_at DESC")
-      end
-    else
+    @visible_search_form = true
+    if params[:keyword].present? == false and params[:prefecture_id].present? == false
       redirect_to request.referer,  alert: '都道府県またはキーワードを入力してください'
     end
+    @keyword = params[:keyword]
+    @posts = Post.search(@keyword, params[:prefecture_id], params[:page])
   end
 
   private

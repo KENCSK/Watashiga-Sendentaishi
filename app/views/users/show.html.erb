@@ -11,7 +11,7 @@
               <div class="col-md-4">
                 <div class="card">
                   <img class="card-img-top">
-                  <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
+                    <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
                   </img>
                   <div class="card-body">
                     <h1 class="card-title"><%= (post.prefecture.prefecture) + " " + (post.address) %></h1>
@@ -30,6 +30,6 @@
           </div>
         </div>
       </div>
-     </div>
+    </div>
   </div>
 </div>
