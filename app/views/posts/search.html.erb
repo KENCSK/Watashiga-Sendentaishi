@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="texts-wrapper">
+    <div class="contents-title">
+      <% if @posts.empty? %>
+        <h3 class="text-center">検索結果に該当する投稿がありませんでした</h3>
+      <% end %>
+      <%= render 'card_style', posts: @posts %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,4 @@
 class CharmsController < ApplicationController
-  def index
-  end
 
   def create
     @post = Post.find(params[:post_id])

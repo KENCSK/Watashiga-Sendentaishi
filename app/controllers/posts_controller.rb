@@ -1,13 +1,9 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
-
-  def index
-    @posts = Post.all
-  end
 
   def show
-    @post = Post.find(params[:id])
-    @user = @post.user
+    @visible_search_form = true
+    @post_detail = Post.find(params[:id])
+    @user = @post_detail.user
   end
 
   def new
@@ -31,11 +27,10 @@ class PostsController < ApplicationController
     end
   end
 
-
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post.id), notice: "投稿を更新しました！！"
+      redirect_to post_path(@post.id), notice: "投稿を更新しました!!"
     else
       render :edit
     end
@@ -44,7 +39,16 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to my_page_path, notice: "投稿を削除しました！！"
+    redirect_to my_page_path, notice: "投稿を削除しました."
+  end
+
+  def search
+    @visible_search_form = true
+    if params[:keyword].present? == false and params[:prefecture_id].present? == false
+      redirect_to request.referer,  alert: '都道府県またはキーワードを入力してください'
+    end
+    @keyword = params[:keyword]
+    @posts = Post.search(@keyword, params[:prefecture_id], params[:page])
   end
 
   private

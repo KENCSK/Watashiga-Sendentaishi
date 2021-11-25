@@ -1,32 +1,29 @@
-<h2>宣伝大使</h2>
-  <%= attachment_image_tag  user, :profile_image, fallback: "no_image.jpg", size: "100x100" %>
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>ユーザー名</th>
-        <th><%= user.name %></th>
-      </tr>
-      <tr>
-        <th>自己紹介</th>
-        <th><%= user.biography %></th>
-      </tr>
-      <tr>
-
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th></th>
-        <th></th>
-
-      </tr>
-      <tr>
-      </tr>
-    </tbody>
- </table>
-
-<div class="row">
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block", method: :get do %>
-   <i class="fas fa-user-cog"></i>
-  <% end %>
+<h2 class="text-center">宣伝大使</h2>
+<div class="user_picture d-flex align-items-center mb-2">
+  <%= attachment_image_tag user, :profile_image, format: "jpeg", fallback: "no_image.jpg", style: "border-radius:50%;}" %><br>
 </div>
+<table class="table">
+  <tbody>
+    <tr>
+      <th class="text-nowrap">ユーザー名</th>
+      <th><%= link_to user.name, user_path(user) %></th>
+    </tr>
+    <tr>
+      <th class="text-nowrap">自己紹介</th>
+      <th><%= user.biography %></th>
+    </tr>
+    <tr>
+      <th class="text-nowrap">投稿数</th>
+      <th><%= user.posts.count %></th>
+    </tr>
+  </tbody>
+</table>
+<% if user.id == current_user.id %>
+  <div class="row">
+    <div class="col-md-12 col-sm-8">
+      <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block", method: :get do %>
+       <i class="fas fa-user-cog"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>
