@@ -29,7 +29,7 @@ body {
 /* トップ画面
 ====================================================*/
 .top-mv {
-  background-image: image-url('top_bg2.jpg');
+  background-image: image-url('top_bg.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -238,7 +238,7 @@ a:hover{
   color : #ff7043;
 }
 
-.pagination {
+.paginate {
   justify-content: center;
   margin-top: 10px;
 }

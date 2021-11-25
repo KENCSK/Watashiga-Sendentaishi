@@ -6,28 +6,7 @@
     <div class="col-md-8 offset-md-1">
       <div class="texts-wrapper">
         <div class="contents-title">
-          <div class="row">
-            <% @posts.each do |post| %>
-              <div class="col-md-4">
-                <div class="card">
-                  <img class="card-img-top">
-                    <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
-                  </img>
-                  <div class="card-body">
-                    <h1 class="card-title"><%= (post.prefecture.prefecture) + " " + (post.address) %></h1>
-                    <p class="card-text"><%= post.title %></p>
-                    <div class="text-right mr-1", id="charms_buttons_<%= post.id %>">
-                      <%= render "charms/charms", post: post %>
-                    </div>
-                  </div>
-                  <div class="card-link">
-                    <a><%= link_to "詳細を見る", post_path(post.id) %></a>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-            <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
-          </div>
+          <%= render 'posts/card_style', posts: @posts %>
         </div>
       </div>
     </div>

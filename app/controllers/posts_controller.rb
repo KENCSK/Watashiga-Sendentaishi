@@ -1,10 +1,7 @@
 class PostsController < ApplicationController
 
-  def index
-    @posts = Post.all
-  end
-
   def show
+    @visible_search_form = true
     @post_detail = Post.find(params[:id])
     @user = @post_detail.user
   end

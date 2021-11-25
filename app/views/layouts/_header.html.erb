@@ -1,48 +1,46 @@
-  <nav class="navbar navbar-expand-md navbar-dark bg-light">
-    <div class="container">
-      <nav class="navbar-brand p-2">
-        <%= link_to root_path do %>
-        <%= image_tag "logo.png", :size => "150x75" %>
-        <% end %>
-      </nav>
-      <ul class="navbar-nav justify-content-start">
-        <li class="text-nowrap">
-        <br><p>都道府県を気軽に宣伝して<br>魅力を伝えるサイト。</p>
+<nav class="navbar navbar-expand-md navbar-dark bg-light">
+  <div class="container">
+    <nav class="navbar-brand p-2">
+      <%= link_to root_path do %>
+      <%= image_tag "logo.png", :size => "150x75" %>
+      <% end %>
+    </nav>
+    <ul class="navbar-nav justify-content-start">
+      <li class="text-nowrap">
+      <br><p>都道府県を気軽に宣伝して<br>魅力を伝えるサイト。</p>
+      </li>
+    </ul>
+      <ul class="navbar-nav ml-auto w-75">
+        <li class="ml-2">
+          <%if @visible_search_form %>
+            <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
+              <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "選択"} %>
+              <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワードを入力:例 山 川 ラーメン" %>
+              <%= f.submit '検索' %>
+            <% end %>
+          <%end%>
         </li>
       </ul>
-        <ul class="navbar-nav ml-auto w-75">
-          <li class="ml-2">
-            <%if @visible_search_form %>
-              <%= form_with model: @post, url: posts_search_path, method: :get, local: true do |f| %>
-                <%# unless current_page?(root_path) or current_page?(new_post_path) %>
-                  <%= f.collection_select :prefecture_id, Prefecture.all, :id, :prefecture, {prompt: "選択"} %>
-                  <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワードを入力:例 山 川 ラーメン" %>
-                  <%= f.submit '検索' %>
-                <%# end %>
-              <% end %>
-            <%end%>
-          </li>
-        </ul>
-      <div class="navbar-toggler-button w-25">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </div>
-      </button>
-      <div class="collapse navbar-collapse align-items-right" id="navbarNavDropdown">
-        <ul class="navbar-nav navbar-nav-item ml-auto text-nowrap">
-          <!--会員ログイン時-->
-          <% if user_signed_in? %>
-            <li class="nav-item"><%= link_to " トップ", root_path, class: "btn btn-warning mr-3 mt-3 pt-1" %></li>
-            <li class="nav-item"><%= link_to " 新規投稿", new_post_path,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
-            <li class="nav-item"><%= link_to " マイページ", my_page_path,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
-            <li class="nav-item"><%= link_to " ログアウト", destroy_user_session_path, method: :delete ,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
-          <!--ログイン前-->
-          <% else %>
-            <li class="nav-item"><%= link_to " トップ", root_path ,class: "btn btn-warning mr-3"%></li>
-            <li class="nav-item"><%= link_to " 新規登録", new_user_registration_path ,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
-            <li class="nav-item"><%= link_to " ログイン", new_user_session_path ,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
-          <% end %>
-        </ul>
-      </div>
+    <div class="navbar-toggler-button w-25">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </div>
-  </nav>
+    </button>
+    <div class="collapse navbar-collapse align-items-right" id="navbarNavDropdown">
+      <ul class="navbar-nav navbar-nav-item ml-auto text-nowrap">
+        <!--会員ログイン時-->
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to " トップ", root_path, class: "btn btn-warning mr-3 mt-3 pt-1" %></li>
+          <li class="nav-item"><%= link_to " 新規投稿", new_post_path,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
+          <li class="nav-item"><%= link_to " マイページ", my_page_path,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
+          <li class="nav-item"><%= link_to " ログアウト", destroy_user_session_path, method: :delete ,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
+        <!--ログイン前-->
+        <% else %>
+          <li class="nav-item"><%= link_to " トップ", root_path ,class: "btn btn-warning mr-3"%></li>
+          <li class="nav-item"><%= link_to " 新規登録", new_user_registration_path ,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
+          <li class="nav-item"><%= link_to " ログイン", new_user_session_path ,class: "btn btn-warning mr-3 mt-3 pt-1"%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

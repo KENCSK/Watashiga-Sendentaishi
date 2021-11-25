@@ -7,11 +7,13 @@ class UsersController < ApplicationController
   end
 
   def charms
+    @visible_search_form = true
     @user = current_user
     @posts = current_user.charmed_posts.page(params[:page])
   end
 
   def show
+    @visible_search_form = true
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page])
   end

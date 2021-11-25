@@ -1,0 +1,40 @@
+<% posts.each_with_index do |post, i| %>
+  <%if i%3 == 0%>
+  <div class="row">
+  <%end%>
+    <div class="col-md-4">
+      <div class="card">
+        <img class="card-img-top">
+        <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
+        </img>
+        <div class="card-body">
+          <h1 class="card-title"><%= (post.prefecture.prefecture) + " " + (post.address) %></h1>
+          <p class="card-text"><%= post.title %></p>
+          <% if post.user.id == current_user.id %>
+            <%= link_to "Edit", edit_post_path(post.id), class:'btn btn-sm btn-success' %>
+            <%= link_to "Destroy", post_path(post), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%>
+            <div class="text-right mr-1">
+            <i class="fas fa-heart charm-btn"></i>
+            <%= post.charms.count %>
+            </div>
+          <% else %>
+            <div class="text-right mr-1", id="charms_buttons_<%= post.id %>">
+              <%= render "charms/charms", post: post %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-link">
+          <a><%= link_to "詳細を見る", post_path(post.id) %> </a>
+        </div>
+      </div>
+    </div>
+  <%if i%3 == 2%>
+  </div>
+  <% end %>
+<% end %>
+<% if (posts.count % 3) != 0%> <%# cardが３の倍数じゃない場合閉じられないので３の倍数でない場合閉じるためにこの処理を追加 %>
+  </div>
+<% end %>
+<div class="row paginate" >
+  <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
+</div>

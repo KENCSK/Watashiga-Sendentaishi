@@ -6,7 +6,7 @@
   <tbody>
     <tr>
       <th class="text-nowrap">ユーザー名</th>
-      <th><%= user.name %></th>
+      <th><%= link_to user.name, user_path(user) %></th>
     </tr>
     <tr>
       <th class="text-nowrap">自己紹介</th>
@@ -21,7 +21,7 @@
 <% if user.id == current_user.id %>
   <div class="row">
     <div class="col-md-12 col-sm-8">
-      <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block", method: :get do %>
+      <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block", method: :get do %>
        <i class="fas fa-user-cog"></i>
       <% end %>
     </div>

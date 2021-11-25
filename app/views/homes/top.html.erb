@@ -17,9 +17,7 @@
         今日の魅力を
       </div>
       <div class="text-center align-self-center">
-        <!--<div class="search-form-box d-inline-block">-->
-          <%= link_to "新規投稿", new_post_path,class: "btn btn-warning"%>
-        <!--</div>-->
+        <%= link_to "新規投稿", new_post_path,class: "btn btn-warning"%>
       </div>
       <div class="top-mv-content-head text-center">
         宣伝する
@@ -42,7 +40,7 @@
         <tbody>
           <!--順位を出すための比較対象を一時的に保存するため-->
           <% last_prefecture_charms = 0 %>
-          <!--ランキングのスタート位置-->
+          <!--ランキングのスタート順位-->
           <% rank = 1 %>
           <% @prefecture_ranks.each.with_index(1) do |prefecture, i| %>
             <tr>
@@ -89,7 +87,7 @@
             		<% end %>
               	<% last_user_charms = user.count %>
               </td>
-              <td><%= link_to user.user.name, user_path(user.user.id) %></td>
+              <td><%= link_to user.user.name.truncate(9, omission: '...'), user_path(user.user.id) %></td>
               <td><%= user.count %></td>
             </tr>
           <% end %>
@@ -109,8 +107,8 @@
         <tbody>
         <% @posts.each do |post| %>
           <tr>
-            <td class="text-nowrap"><%= post.user.name %></td>
-            <td><%= link_to post.title.truncate(11, omission: '...'), post_path(post.id) %></td>
+            <td class="text-nowrap"><%= post.user.name.truncate(8, omission: '...') %></td>
+            <td><%= link_to post.title.truncate(10, omission: '...'), post_path(post.id) %></td>
             <td class="text-nowrap"><%= post.prefecture.prefecture %></td>
           </tr>
         <% end %>
