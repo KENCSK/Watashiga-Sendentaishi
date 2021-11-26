@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resource :charms, only:[:create, :destroy]
+    resource :charms, only: %i[create destroy]
   end
-
 end

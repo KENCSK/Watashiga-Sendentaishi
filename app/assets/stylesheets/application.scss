@@ -147,13 +147,12 @@ table tbody td {
   margin: 10px;
 }
 .card-img-top {
-  max-width: 100%;
-  height: auto;
+    width: 100%;
+    object-fit: cover;
 }
 .card-body {
   padding: 5px;
 }
-
 .card-title {
   font-size: 25px;
   margin-bottom: 20px;
@@ -164,11 +163,9 @@ table tbody td {
   font-size: 20px;
   line-height: 1.5;
 }
-
 .card-charms {
   display: inline-block;
 }
-
 .card-link {
   font-size: 20px;
   text-align: center;
@@ -203,7 +200,6 @@ table tbody td {
   border-color: #000000;
   background-color: #edb100;
 }
-
 .navbar-toggler-button {
   align-items: flex-end;
 }
