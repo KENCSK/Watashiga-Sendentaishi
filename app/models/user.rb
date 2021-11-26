@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  attachment :profile_image, content_type: ["image/jpeg", "image/png"]
+  attachment :profile_image, content_type: ['image/jpeg', 'image/png']
 
   has_many :posts, dependent: :destroy
   has_many :charms, dependent: :destroy
@@ -15,8 +15,8 @@ class User < ApplicationRecord
     validates :email, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   end
 
+  # 投稿に魅力度が付与されているかチェックする
   def already_charmed?(post)
-    self.charms.exists?(post_id: post.id)
+    charms.exists?(post_id: post.id)
   end
-
 end
