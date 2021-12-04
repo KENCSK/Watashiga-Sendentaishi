@@ -1,13 +1,9 @@
-<% posts.each_with_index do |post, i| %>
-  <% if i%3 == 0 %>
-  <div class="row">
-  <% end %>
+<div class="row">
+  <% posts.each_with_index do |post| %>
     <div class="col-md-4 d-flex">
       <div class="card">
-        <img class="card-img-top">
-        <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
-        </img>
         <div class="card-body">
+          <%= attachment_image_tag post, :post_image, format: 'jpeg', fallback: "no_image.jpg", class:'card-img-top' %>
           <h1 class="card-title"><%= post.title %></h1>
           <p class="card-text"><%= (post.prefecture.prefecture) + " " + (post.address) %></p>
           <% if user_signed_in? && post.user.id == current_user.id %>
@@ -28,13 +24,8 @@
         </div>
       </div>
     </div>
-  <% if i%3 == 2 %>
-  </div>
   <% end %>
-<% end %>
-<% if (posts.count % 3) != 0 %> <%# postが３の倍数じゃない場合閉じられないので３の倍数でない場合閉じるためにこの処理を追加 %>
-  </div>
-<% end %>
+</div>
 <div class="row paginate" >
   <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
 </div>

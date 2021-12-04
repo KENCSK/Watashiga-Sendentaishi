@@ -6,13 +6,9 @@
     <div class="col-md-8 offset-md-1">
       <div class="card">
         <div class="card-body">
-          <h2 class="card-title"><%=  @post_detail.title %></h2>
-        </div>
-        <img class="card-img-top">
-          <%= attachment_image_tag  @post_detail, :post_image, format: 'jpeg', fallback: "no_image.jpg" %>
-        </img>
-        <div class="card-body">
-          <h1 class="card-title"><%=  @post_detail.text %></h1>
+          <h2 class="card-title"><%= @post_detail.title %></h2>
+          <%= attachment_image_tag @post_detail, :post_image, format: 'jpeg', fallback: "no_image.jpg", class:'card-img-top-show' %>
+          <h1 class="card-title"><%= @post_detail.text %></h1>
           <p class="card-text"><%= ( @post_detail.prefecture.prefecture) + " " + ( @post_detail.address) %></p>
           <div class="d-grid gap-2 d-md-block">
             <% if  user_signed_in? && @post_detail.user.id == current_user.id %>
