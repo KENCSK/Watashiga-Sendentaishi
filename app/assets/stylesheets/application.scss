@@ -148,6 +148,12 @@ table tbody td {
 }
 .card-img-top {
     width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+.card-img-top-show {
+    width: 100%;
+    max-height: 500px;
     object-fit: cover;
 }
 .card-body {
