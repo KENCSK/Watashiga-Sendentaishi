@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :prefecture
   has_many :charms, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   attachment :post_image, content_type: ['image/jpeg', 'image/png']
 

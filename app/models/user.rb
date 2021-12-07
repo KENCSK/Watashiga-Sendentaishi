@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :charms, dependent: :destroy
   has_many :charmed_posts, through: :charms, source: :post
+  has_many :comments
 
   with_options presence: true do
     validates :name, length: { maximum: 20 }
