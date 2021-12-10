@@ -27,6 +27,23 @@
           </div>
         </div>
       </div>
+      <div>
+        <p>コメント件数：<%= @post.comments.count %></p>
+        <table class="table">
+          <% post.comments.each do |comment| %>
+          <tr>
+          <th><%= attachment_image_tag  @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg" %></th>
+            <th><%= comment.user.name %></th>
+            <th><%= comment.content %></th>
+            <% if comment.user == current_user %>
+            <div>
+              <th><%= link_to "Destroy", post_comment_path(comment.post, comment), method: :delete, remote: true, class: 'btn btn-sm btn-danger' %></th>
+            </div>
+            <% end %>
+          <% end %>
+          </tr>
+        </table>
+        </div>
     </div>
   </div>
 </div>
