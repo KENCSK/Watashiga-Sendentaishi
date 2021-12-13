@@ -3,6 +3,7 @@ class PostsController < ApplicationController
     @visible_search_form = true
     @post_detail = Post.find(params[:id])
     @user = @post_detail.user
+    @comment = current_user.comments.new
   end
 
   def new
