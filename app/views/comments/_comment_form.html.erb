@@ -1,0 +1,6 @@
+<%= form_with(model:[@post_detail, @comment], method: :post) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <%= f.text_area :comment_content, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.hidden_field :post_id, value: @post_detail.id %>
+  <%= f.submit '送信', :class=>'btn btn-success btn-md' %>
+<% end %>

@@ -27,6 +27,12 @@
           </div>
         </div>
       </div>
+      <div>
+        <%= render "comments/comment_form", post_detail: @post_detail, comment: @comment %>
+      </div>
+      <div class="contents_area_<%= @post_detail.id %>">
+        <%= render "comments/comments", post_detail: @post_detail %>
+      </div>
     </div>
   </div>
 </div>

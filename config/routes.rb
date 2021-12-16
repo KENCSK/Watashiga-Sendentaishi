@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   resources :posts do
     resource :charms, only: %i[create destroy]
+    resources :comments, only: [:create, :destroy]
   end
 end
