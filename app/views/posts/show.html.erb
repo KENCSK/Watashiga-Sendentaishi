@@ -28,30 +28,10 @@
         </div>
       </div>
       <div>
-        <p>コメント件数：<%= @post_detail.comments.count %></p>
-        <table class="table">
-          <% @post_detail.comments.each do |comment| %>
-          <tr>
-          <th><%= attachment_image_tag  @user, :profile_image, format: 'jpeg', :size => "100x100", fallback: "no_image.jpg", style: "border-radius:50%;}" %></th>
-            <th><%= comment.user.name %></th>
-            <th><%= comment.comment_content %></th>
-            <% if comment.user == current_user %>
-            <div>
-              <th><%= link_to "Destroy", post_comment_path(comment.post, comment), method: :delete, remote: true, class: 'btn btn-sm btn-danger' %></th>
-            </div>
-            <% end %>
-          <% end %>
-          </tr>
-        </table>
-        </div>
-        <div>
-          <%= form_with(model:[@post_detail, @comment], method: :post) do |f| %>
-            <%= render 'layouts/error_messages', model: f.object %>
-            </div>
-            <%= f.text_area :comment_content, rows:'5',placeholder: "コメントをここに" %>
-            <%= f.hidden_field :post_id, value: @post_detail.id %>
-            <%= f.submit '送信', :class=>'btn btn-success btn-md' %>
-          <% end %>
+        <%= render "comments/comment_form", post_detail: @post_detail, comment: @comment %>
+      </div>
+      <div class="contents_area_<%= @post_detail.id %>">
+        <%= render "comments/comments", post_detail: @post_detail %>
       </div>
     </div>
   </div>

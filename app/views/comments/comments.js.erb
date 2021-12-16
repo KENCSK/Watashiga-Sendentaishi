@@ -1,0 +1,2 @@
+$(".contents_area_<%= @post.id %>").html("<%= j(render 'comments/comments', post_detail: @post_detail, comment: @comment) %>");
+$("text_area").val('');
