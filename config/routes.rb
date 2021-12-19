@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'prefectures/index'
+  get 'prefecture/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
@@ -11,9 +13,9 @@ Rails.application.routes.draw do
       get :charms
     end
   end
-
+  resources :prefectures, only: [:index]
   resources :posts do
-    resource :charms, only: %i[create destroy]
+    resource :charms, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
 end
