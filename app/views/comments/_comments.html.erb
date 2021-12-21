@@ -1,6 +1,6 @@
-<p>コメント件数：<%= @post_detail.comments.count %></p>
+<p>コメント件数：<%= post_detail.comments.count %></p>
 <table class="table">
-  <% @post_detail.comments.each do |comment| %>
+  <% post_detail.comments.each do |comment| %>
   <tr>
   <th><%= attachment_image_tag  @user, :profile_image, format: 'jpeg', :size => "100x100", fallback: "no_image.jpg", style: "border-radius:50%;}" %></th>
     <th><%= comment.user.name %></th>
