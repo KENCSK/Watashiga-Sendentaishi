@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2021_12_07_124537) do
     t.string "post_image_filename"
     t.string "post_image_size"
     t.string "post_image_content_type"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "prefectures", force: :cascade do |t|

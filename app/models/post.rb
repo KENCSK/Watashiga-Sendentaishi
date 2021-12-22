@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   attachment :post_image, content_type: ['image/jpeg', 'image/png']
+  geocoded_by :address
+  after_validation :geocode
 
   with_options presence: true do
     validates :title, length: { maximum: 20 }
