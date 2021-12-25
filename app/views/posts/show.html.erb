@@ -11,11 +11,11 @@
           <h1 class="card-title"><%= @post_detail.text %></h1>
           <p class="card-text"><%= ( @post_detail.prefecture.prefecture) + " " + ( @post_detail.address) %></p>
           <div class="d-grid gap-2 d-md-block">
-            <% if  user_signed_in? && @post_detail.user.id == current_user.id %>
+            <% if user_signed_in? && @post_detail.user.id == current_user.id %>
               <%= link_to "編集", edit_post_path( @post_detail.id), class:'btn btn-sm btn-success' %>
               <%= link_to "削除", post_path( @post_detail), method: :delete, "data-confirm" => "本当に消しますか?", class: 'btn btn-sm btn-danger'%>
               <i class="fas fa-heart charm-btn"></i>
-              <%=  @post_detail.charms.count %>
+              <%= @post_detail.charms.count %>
             <% else %>
               <div id="charms_buttons_<%=  @post_detail.id %>">
                 <%= render "charms/charms", post:  @post_detail %>
@@ -27,6 +27,10 @@
           </div>
         </div>
       </div>
+      <div>
+        <%= @post_detail.address %>
+      </div>
+      <div id="show_map" style: "height: 320px; width: 400px;"></div>
       <div>
         <%= render "comments/comment_form", post_detail: @post_detail, comment: @comment %>
       </div>
