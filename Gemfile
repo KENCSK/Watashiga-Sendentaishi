@@ -90,3 +90,5 @@ gem 'kaminari'
 gem 'devise-i18n'
 gem 'rails-i18n'
 gem 'geocoder'
+gem "gmaps4rails"
+gem "gon"
