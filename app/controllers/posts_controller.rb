@@ -4,6 +4,10 @@ class PostsController < ApplicationController
     @post_detail = Post.find(params[:id])
     @user = @post_detail.user
     @comment = current_user.comments.new
+    @lat = @post_detail.latitude
+    @lng = @post_detail.longitude
+    gon.lat = @lat
+    gon.lng = @lng
   end
 
   def new
