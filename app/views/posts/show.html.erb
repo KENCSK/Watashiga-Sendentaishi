@@ -6,7 +6,7 @@
     <div class="col-md-8 offset-md-1">
       <div class="card">
         <div class="card-body">
-          <h2 class="card-title"><%= @post_detail.title %></h2>
+          <div class="card-title"><h2 class="show-card-title"><%= @post_detail.title %></h2></div>
           <%= attachment_image_tag @post_detail, :post_image, format: 'jpeg', fallback: "no_image.jpg", class:'card-img-top-show' %>
           <h1 class="card-title"><%= @post_detail.text %></h1>
           <p class="card-text"><%= ( @post_detail.prefecture.prefecture) + " " + ( @post_detail.address) %></p>
