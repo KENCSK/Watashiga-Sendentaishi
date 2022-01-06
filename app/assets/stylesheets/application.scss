@@ -191,7 +191,7 @@ table tbody td {
   color: #0090aa;
 }
 
-/* ユーザープロフィール用画像
+/* ユーザープロフィール
 ====================================================*/
 .user_picture {
   .profile_image {
@@ -200,6 +200,11 @@ table tbody td {
     width: 150px;
     height: 150px;
   }
+}
+
+.user_info_title {
+    /*線の種類（二重線）太さ 色*/
+  border-bottom: double 5px #FFC778;
 }
 /* ナビバー
 ====================================================*/
